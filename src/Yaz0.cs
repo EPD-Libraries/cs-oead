@@ -9,10 +9,10 @@ namespace CsOead;
 /// </summary>
 public unsafe partial class Yaz0
 {
-    [LibraryImport("cs-oead")]
+    [LibraryImport("cs_oead")]
     private static partial DataMarshal Compress(byte* src, int src_len, uint alignment, int level);
 
-    [LibraryImport("cs-oead")]
+    [LibraryImport("cs_oead")]
     private static partial void Decompress(byte* src, int src_len, byte* dst, int dst_len);
 
     public static DataMarshal Compress(string inputFile, uint alignment = 0, int level = 7) => Compress(File.ReadAllBytes(inputFile), alignment, level);
