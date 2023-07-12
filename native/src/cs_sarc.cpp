@@ -1,13 +1,23 @@
 #include "cs_sarc.h"
 
-bool SarcFromBinary(u8* src, int src_len, Sarc** output) {
+void* SarcFromBinary(u8* src, size_t src_len, Sarc** output) {
   try {
     *output = new Sarc({src, src_len});
-    return true;
-  } catch (std::exception ex) {
-    std::cout << ex.what() << std::endl;
-    return false;
+  } catch (std::runtime_error ex) {
+    return new auto(ex);
   }
+
+  return nullptr;
 }
 
-bool SarcToBinary(SarcWriter* writer, std::vector<u8>** output) {}
+void* SarcToBinary(SarcWriter* writer, u32* alignment, std::vector<u8>** output) {
+  try {
+    auto result = writer->Write();
+    *alignment = result.first;
+    *output = new auto(result.second);
+  } catch (std::runtime_error ex) {
+    return new auto(ex);
+  }
+
+  return nullptr;
+}

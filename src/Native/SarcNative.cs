@@ -6,12 +6,10 @@
 internal static unsafe partial class SarcNative
 {
     [LibraryImport("cs_oead")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    internal static partial bool SarcFromBinary(byte* src, int src_len, out Sarc output);
+    internal static partial ResultMarshal SarcFromBinary(byte* src, int src_len, out Sarc output);
 
     [LibraryImport("cs_oead")]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    internal static partial bool SarcToBinary(IntPtr writer, out DataMarshal output);
+    internal static partial ResultMarshal SarcToBinary(IntPtr writer, out DataMarshal output);
 
     [LibraryImport("cs_oead")]
     internal static partial int SarcGetNumFiles(Sarc sarc);
