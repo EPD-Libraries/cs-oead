@@ -11,10 +11,4 @@ public static class Resource
                 AppContext.BaseDirectory, "Data", Path.GetFileNameWithoutExtension(file), $"{method}.res")
         );
     }
-
-    public static string Output([CallerMemberName] string method = "", [CallerFilePath] string file = "")
-    {
-        return Path.Combine(
-            AppContext.BaseDirectory, "Data", Path.GetFileNameWithoutExtension(file), $"{method}.output.res");
-    }
 }
