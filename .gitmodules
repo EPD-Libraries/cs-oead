@@ -1,3 +1,6 @@
 [submodule "lib/Native.IO"]
 	path = lib/Native.IO
 	url = https://github.com/ArchLeaders/Native.IO
+[submodule "native/lib/oead"]
+	path = native/lib/oead
+	url = https://github.com/TotkMods/oead
