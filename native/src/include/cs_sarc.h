@@ -1,3 +1,5 @@
+#pragma once
+
 #include <oead/sarc.h>
 
 #include "export.h"

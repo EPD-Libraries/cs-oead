@@ -1,3 +1,5 @@
+#pragma once
+
 #include <oead/yaz0.h>
 
 #include "export.h"
