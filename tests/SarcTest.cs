@@ -1,5 +1,6 @@
 ﻿using CsOead.Exceptions;
 using CsOead.Tests.Helpers;
+using System.Text;
 
 namespace CsOead.Tests;
 
@@ -32,6 +33,21 @@ public class SarcTest
 
         Assert.IsTrue(sarc.Endianness == Endianness.Big);
         Assert.IsTrue(sarc.Count == 15);
+
+        return Task.CompletedTask;
+    }
+
+    [TestMethod]
+    public Task Iterator()
+    {
+        byte[] raw = Resource.Input("FromBinary");
+        Sarc sarc = Sarc.FromBinary(raw);
+
+        foreach ((var file, var buffer) in sarc) {
+            Console.WriteLine(file);
+            string content = Path.GetFileNameWithoutExtension(file);
+            Assert.IsTrue(Encoding.UTF8.GetString(buffer) == content);
+        }
 
         return Task.CompletedTask;
     }
