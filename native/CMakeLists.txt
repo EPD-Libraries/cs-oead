@@ -16,8 +16,8 @@ enable_testing()
 
 add_library(cs_oead SHARED
     ./src/include/export.h
-    ./src/include/cs_oead.h
-    ./src/cs_oead.cpp
+    ./src/include/cs_yaz0.h
+    ./src/cs_yaz0.cpp
 )
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/lib/oead)
