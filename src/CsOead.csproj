@@ -12,15 +12,16 @@
   </ItemGroup>
 
   <ItemGroup>
-	<EmbeddedResource Include="..\native\build\cs_oead.dll"
-					  Link="Lib\cs_oead.dll"
-					  Condition="Exists('..\native\build\cs_oead.dll')" />
-	<EmbeddedResource Include="..\native\build\linux\cs_oead.so"
-					  Link="Lib\cs_oead.so"
-					  Condition="Exists('..\native\build\linux\cs_oead.so')" />
-	<EmbeddedResource Include="..\native\build\macos\cs_oead.dylib"
-					  Link="Lib\cs_oead.dylib"
-					  Condition="Exists('..\native\build\macos\cs_oead.dylib')" />
+	<EmbeddedResource Include="..\native\build\cs_oead.dll" Link="Lib\cs_oead.dll" Condition="Exists('..\native\build\cs_oead.dll')" />
+	<EmbeddedResource Include="..\native\build\linux\cs_oead.so" Link="Lib\cs_oead.so" Condition="Exists('..\native\build\linux\cs_oead.so')" />
+	<EmbeddedResource Include="..\native\build\macos\cs_oead.dylib" Link="Lib\cs_oead.dylib" Condition="Exists('..\native\build\macos\cs_oead.dylib')" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="CsOead.Native" />
+    <Using Include="Microsoft.Win32.SafeHandles" />
+    <Using Include="Native.IO.Handles" />
+    <Using Include="System.Runtime.InteropServices" />
   </ItemGroup>
 
 </Project>
