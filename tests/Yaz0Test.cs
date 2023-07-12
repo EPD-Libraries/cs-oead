@@ -1,6 +1,5 @@
 ﻿using CsOead.Tests.Helpers;
 using Native.IO.Handles;
-using Native.IO.Services;
 using System.Buffers.Binary;
 using System.Text;
 
@@ -9,17 +8,7 @@ namespace CsOead.Tests;
 [TestClass]
 public class Yaz0Test
 {
-    static Yaz0Test()
-    {
-        NativeLibraryManager
-            .RegisterPath("lib", out bool isCommonLoaded)
-            .Register(new OeadLibrary(), out bool isOeadLoaded);
-
-        Console.WriteLine($"""
-            Common Library: {isCommonLoaded}
-            Oead Library: {isOeadLoaded}
-            """);
-    }
+    static Yaz0Test() => OeadContext.Init();
 
     [TestMethod]
     public Task Compress()
