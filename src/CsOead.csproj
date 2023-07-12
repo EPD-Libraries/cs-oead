@@ -10,4 +10,16 @@
     <ProjectReference Include="..\lib\Native.IO\src\Native.IO.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+	<EmbeddedResource Include="..\native\build\cs_oead.dll"
+					  Link="Lib\cs_oead.dll"
+					  Condition="Exists('..\native\build\cs_oead.dll')" />
+	<EmbeddedResource Include="..\native\build\linux\cs_oead.so"
+					  Link="Lib\cs_oead.so"
+					  Condition="Exists('..\native\build\linux\cs_oead.so')" />
+	<EmbeddedResource Include="..\native\build\macos\cs_oead.dylib"
+					  Link="Lib\cs_oead.dylib"
+					  Condition="Exists('..\native\build\macos\cs_oead.dylib')" />
+  </ItemGroup>
+
 </Project>
