@@ -6,5 +6,5 @@
 
 using namespace oead;
 
-EXP void SarcCurrent(SarcWriter::FileMap::iterator* iterator, const char** key, std::vector<u8>* output);
-EXP bool SarcAdvance(SarcWriter* writer, SarcWriter::FileMap::iterator* iterator, SarcWriter::FileMap::iterator** next);
+EXP void SarcIteratorCurrent(SarcWriter::FileMap::iterator* iterator, const char** key, std::vector<u8>** output);
+EXP bool SarcIteratorAdvance(SarcWriter* writer, SarcWriter::FileMap::iterator* iterator, SarcWriter::FileMap::iterator** next);
