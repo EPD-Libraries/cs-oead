@@ -1,25 +1,17 @@
-﻿using Native.IO.Handles;
-using System.Buffers.Binary;
-using System.Runtime.InteropServices;
+﻿using System.Buffers.Binary;
 
 namespace CsOead;
 
 /// <summary>
 /// Static, functional wrapper around the <a href="https://oead.readthedocs.io/en/stable/yaz0.html"><c>oead::yaz0</c></a> namespace
 /// </summary>
-public unsafe partial class Yaz0
+public unsafe class Yaz0
 {
-    [LibraryImport("cs_oead")]
-    private static partial DataMarshal Compress(byte* src, int src_len, uint alignment, int level);
-
-    [LibraryImport("cs_oead")]
-    private static partial void Decompress(byte* src, int src_len, byte* dst, int dst_len);
-
     public static DataMarshal Compress(string inputFile, uint alignment = 0, int level = 7) => Compress(File.ReadAllBytes(inputFile), alignment, level);
     public static DataMarshal Compress(ReadOnlySpan<byte> src, uint alignment = 0, int level = 7)
     {
         fixed (byte* ptr = src) {
-            return Compress(ptr, src.Length, alignment, level);
+            return Yaz0Native.Compress(ptr, src.Length, alignment, level);
         }
     }
 
@@ -39,7 +31,7 @@ public unsafe partial class Yaz0
 
         fixed (byte* ptr = src) {
             fixed (byte* dst_ptr = dst) {
-                Decompress(ptr, src.Length, dst_ptr, decompressedSize);
+                Yaz0Native.Decompress(ptr, src.Length, dst_ptr, decompressedSize);
             }
         }
 
