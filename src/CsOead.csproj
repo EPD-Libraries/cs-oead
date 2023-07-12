@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\lib\Native.IO\src\Native.IO.csproj" />
+  </ItemGroup>
+
 </Project>
