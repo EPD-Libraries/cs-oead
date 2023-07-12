@@ -3,8 +3,8 @@
 internal static unsafe partial class Yaz0Native
 {
     [LibraryImport("cs_oead")]
-    internal static partial ResultMarshal Compress(byte* src, int src_len, uint alignment, int level, out DataMarshal output);
+    internal static partial DataMarshal Compress(byte* src, int src_len, uint alignment, int level);
 
     [LibraryImport("cs_oead")]
-    internal static partial ResultMarshal Decompress(byte* src, int src_len, byte* dst, int dst_len);
+    internal static partial void Decompress(byte* src, int src_len, byte* dst, int dst_len);
 }

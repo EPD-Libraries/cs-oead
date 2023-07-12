@@ -11,8 +11,7 @@ public unsafe class Yaz0
     public static DataMarshal Compress(ReadOnlySpan<byte> src, uint alignment = 0, int level = 7)
     {
         fixed (byte* ptr = src) {
-            ResultMarshal result = Yaz0Native.Compress(ptr, src.Length, alignment, level, out DataMarshal output);
-            return result == Result.Ok ? output : throw new Yaz0Exception(result);
+            return Yaz0Native.Compress(ptr, src.Length, alignment, level);
         }
     }
 
@@ -32,10 +31,7 @@ public unsafe class Yaz0
 
         fixed (byte* ptr = src) {
             fixed (byte* dst_ptr = dst) {
-                ResultMarshal result = Yaz0Native.Decompress(ptr, src.Length, dst_ptr, decompressedSize);
-                if (result != Result.Ok) {
-                    throw new Yaz0Exception(result);
-                }
+                Yaz0Native.Decompress(ptr, src.Length, dst_ptr, decompressedSize);
             }
         }
 
