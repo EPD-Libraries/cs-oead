@@ -15,8 +15,7 @@ include(CTest)
 enable_testing()
 
 add_library(cs_oead SHARED
-    ./src/include/native.h
-
+    ./src/include/export.h
     ./src/include/cs_oead.h
     ./src/cs_oead.cpp
 )
