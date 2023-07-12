@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="CsOead.Exceptions" />
     <Using Include="CsOead.Native" />
     <Using Include="Microsoft.Win32.SafeHandles" />
     <Using Include="Native.IO.Handles" />
