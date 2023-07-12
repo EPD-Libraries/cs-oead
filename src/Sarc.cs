@@ -27,7 +27,7 @@ public unsafe class Sarc : SafeHandleMinusOneIsInvalid, IEnumerable<KeyValuePair
     private IntPtr _writer = -1;
     private IntPtr Writer {
         get => _writer <= -1 ? _writer = SarcNative.SarcWriterFromSarc(this) : _writer;
-    }
+            }
 
     private bool IsWriter => _writer > -1;
 
@@ -35,13 +35,9 @@ public unsafe class Sarc : SafeHandleMinusOneIsInvalid, IEnumerable<KeyValuePair
     public static Sarc FromBinary(ReadOnlySpan<byte> data)
     {
         fixed (byte* ptr = data) {
-            if (SarcNative.SarcFromBinary(ptr, data.Length, out Sarc output)) {
-                return output;
-            }
+            ResultMarshal result = SarcNative.SarcFromBinary(ptr, data.Length, out Sarc output);
+            return result == Result.Ok ? output : throw new InvalidSarcException(result);
         }
-
-        throw new InvalidSarcException(
-            "The provided data could not be read");
     }
 
     public DataMarshal ToBinary(Endianness? endianness = null, Mode? mode = null)
@@ -54,12 +50,8 @@ public unsafe class Sarc : SafeHandleMinusOneIsInvalid, IEnumerable<KeyValuePair
             SarcNative.SarcWriterSetMode(Writer, _mode);
         }
 
-        if (SarcNative.SarcToBinary(Writer, out DataMarshal output)) {
-            return output;
-        }
-
-        throw new InvalidSarcException(
-            $"Could not serialize {(IsWriter ? "SarcWriter" : "Sarc")}");
+        ResultMarshal result = SarcNative.SarcToBinary(Writer, out DataMarshal output);
+        return result == Result.Ok ? output : throw new InvalidSarcException(result);
     }
 
     public int Count {
