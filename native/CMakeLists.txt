@@ -16,6 +16,8 @@ enable_testing()
 
 add_library(cs_oead SHARED
     ./src/include/export.h
+    ./src/include/cs_sarc.h
+    ./src/cs_sarc.cpp
     ./src/include/cs_yaz0.h
     ./src/cs_yaz0.cpp
 )
