@@ -1,3 +1,3 @@
-# CS-MSBT
+# CS-OEAD
 
-C# wrapper for [msbt](https://github.com/EPD-Libraries/msbt)
+C# wrapper for [oead](https://github.com/zeldamods/oead)
