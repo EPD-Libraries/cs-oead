@@ -9,7 +9,7 @@ internal static unsafe partial class SarcNative
     internal static partial ResultMarshal SarcFromBinary(byte* src, int src_len, out Sarc output);
 
     [LibraryImport("cs_oead")]
-    internal static partial ResultMarshal SarcToBinary(IntPtr writer, out DataMarshal output);
+    internal static partial ResultMarshal SarcToBinary(IntPtr writer, out uint alignment, out DataMarshal output);
 
     [LibraryImport("cs_oead")]
     internal static partial int SarcGetNumFiles(Sarc sarc);
@@ -19,20 +19,20 @@ internal static unsafe partial class SarcNative
 
     [LibraryImport("cs_oead", StringMarshalling = StringMarshalling.Utf8)]
     [return: MarshalAs(UnmanagedType.Bool)]
-    internal static partial bool SarcGetFile(Sarc sarc, string name, out byte* dst, out int dst_len);
-
-    [LibraryImport("cs_oead")]
-    internal static partial int SarcWriterGetNumFiles(IntPtr writer);
-
-    [LibraryImport("cs_oead", StringMarshalling = StringMarshalling.Utf8)]
-    [return: MarshalAs(UnmanagedType.Bool)]
-    internal static partial bool SarcWriterGetFile(IntPtr writer, string name, out byte* dst, out int dst_len);
+    internal static partial bool SarcGetFile(Sarc sarc, string key, out byte* dst, out int dst_len);
 
     [LibraryImport("cs_oead")]
     internal static partial IntPtr SarcWriterNew(Endianness endian, Mode mode);
 
     [LibraryImport("cs_oead")]
     internal static partial IntPtr SarcWriterFromSarc(Sarc sarc);
+
+    [LibraryImport("cs_oead")]
+    internal static partial int SarcWriterGetNumFiles(IntPtr writer);
+
+    [LibraryImport("cs_oead", StringMarshalling = StringMarshalling.Utf8)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool SarcWriterGetFile(IntPtr writer, string key, out byte* dst, out int dst_len);
 
     [LibraryImport("cs_oead")]
     internal static partial void SarcWriterSetEndianness(IntPtr writer, Endianness endianness);
@@ -45,10 +45,10 @@ internal static unsafe partial class SarcNative
     internal static partial bool SarcWriterContainsKey(IntPtr writer, string name);
 
     [LibraryImport("cs_oead", StringMarshalling = StringMarshalling.Utf8)]
-    internal static partial void SarcWriterAddFile(IntPtr writer, string name, byte* src, int src_len);
+    internal static partial void SarcWriterAddFile(IntPtr writer, string key, byte* src, int src_len);
 
     [LibraryImport("cs_oead", StringMarshalling = StringMarshalling.Utf8)]
-    internal static partial void SarcWriterRemoveFile(IntPtr writer, string name);
+    internal static partial void SarcWriterRemoveFile(IntPtr writer, string key);
 
     [LibraryImport("cs_oead")]
     internal static partial void SarcWriterClearFiles(IntPtr writer);

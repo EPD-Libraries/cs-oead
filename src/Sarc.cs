@@ -1,5 +1,4 @@
-﻿using CsOead.Exceptions;
-using System.Collections;
+﻿using System.Collections;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.Marshalling;
 
@@ -40,7 +39,8 @@ public unsafe class Sarc : SafeHandleMinusOneIsInvalid, IEnumerable<KeyValuePair
         }
     }
 
-    public DataMarshal ToBinary(Endianness? endianness = null, Mode? mode = null)
+    public DataMarshal ToBinary(Endianness? endianness = null, Mode? mode = null) => ToBinary(out _, endianness, mode);
+    public DataMarshal ToBinary(out uint alignment, Endianness? endianness = null, Mode? mode = null)
     {
         if (endianness is Endianness _endianness) {
             SarcNative.SarcWriterSetEndianness(Writer, _endianness);
@@ -50,7 +50,7 @@ public unsafe class Sarc : SafeHandleMinusOneIsInvalid, IEnumerable<KeyValuePair
             SarcNative.SarcWriterSetMode(Writer, _mode);
         }
 
-        ResultMarshal result = SarcNative.SarcToBinary(Writer, out DataMarshal output);
+        ResultMarshal result = SarcNative.SarcToBinary(Writer, out alignment, out DataMarshal output);
         return result == Result.Ok ? output : throw new InvalidSarcException(result);
     }
 
