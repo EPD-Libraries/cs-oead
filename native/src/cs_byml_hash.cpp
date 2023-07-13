@@ -37,7 +37,7 @@ void BymlHashIteratorCurrent(HashIterator* iterator, const char** key, Byml** va
 
 bool BymlHashIteratorAdvance(Byml::Hash* hash, HashIterator* iterator, HashIterator** next) {
   if (iterator == NULL) {
-    *next = new auto{hash->begin()};
+    *next = new auto(hash->begin());
     return true;
   }
 
@@ -57,3 +57,5 @@ bool BymlHashFree(Byml::Hash* hash) {
   delete hash;
   return true;
 }
+
+static_assert(sizeof(void*) == 4);
