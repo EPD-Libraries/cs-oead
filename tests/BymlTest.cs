@@ -1,7 +1,6 @@
 ﻿using CsOead.Exceptions;
 using CsOead.Native;
 using CsOead.Tests.Helpers;
-using System;
 using System.Text;
 
 namespace CsOead.Tests;
@@ -101,7 +100,31 @@ public class BymlTest
         bymlHash.Clear();
         Assert.IsFalse(bymlHash.Count > 0);
 
-        BymlHash bymlArray = root["byml_hash"].GetHash();
+        BymlArray bymlArray = root["byml_array"].GetArray();
+
+        foreach (var item in bymlArray) {
+            Assert.IsTrue(item.Type switch {
+                BymlType.Int => item.GetInt() == 0,
+                BymlType.Float => item.GetFloat() == 1.0,
+                BymlType.UInt => item.GetUInt() == 0x02,
+                BymlType.Int64 => item.GetInt64() == 3L,
+                BymlType.String => item.GetString().ToString() == "4",
+                _ => false
+            });
+        }
+
+        Byml arbitrary = bymlArray[3];
+        bymlArray.Remove(arbitrary);
+
+        Assert.IsTrue(bymlArray.Length == 4);
+
+        bymlArray.Add("string");
+
+        Assert.IsTrue(bymlArray.Last().GetString().ToString() == "string");
+        Assert.IsTrue(bymlArray.Length == 5);
+
+        bymlArray.Clear();
+        Assert.IsFalse(bymlArray.Length > 0);
 
         return Task.CompletedTask;
     }
