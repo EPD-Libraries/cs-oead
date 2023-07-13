@@ -17,6 +17,8 @@ enable_testing()
 add_library(cs_oead SHARED
     ./src/include/cs_byml_get.h
     ./src/cs_byml_get.cpp
+    ./src/include/cs_byml_hash.h
+    ./src/cs_byml_hash.cpp
     ./src/include/cs_byml_set.h
     ./src/cs_byml_set.cpp
     ./src/include/cs_byml.h
