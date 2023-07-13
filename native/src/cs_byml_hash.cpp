@@ -57,5 +57,3 @@ bool BymlHashFree(Byml::Hash* hash) {
   delete hash;
   return true;
 }
-
-static_assert(sizeof(void*) == 4);
