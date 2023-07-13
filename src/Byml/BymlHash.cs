@@ -1,6 +1,7 @@
+﻿using System.Collections;
 ﻿namespace CsOead;
 
-public unsafe class BymlHash : SafeHandleZeroOrMinusOneIsInvalid // , IEnumerable<KeyValuePair<string, Byml>>, IEnumerable
+public unsafe class BymlHash : SafeHandleZeroOrMinusOneIsInvalid, IEnumerable<KeyValuePair<string, Byml>>, IEnumerable
 {
     public BymlHash() : base(true) { }
 
@@ -46,6 +47,48 @@ public unsafe class BymlHash : SafeHandleZeroOrMinusOneIsInvalid // , IEnumerabl
     public void Clear()
     {
         BymlHashNative.BymlHashClear(this);
+    }
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    public IEnumerator<KeyValuePair<string, Byml>> GetEnumerator()
+    {
+        return new Enumerator(this);
+    }
+
+    public struct Enumerator : IEnumerator<KeyValuePair<string, Byml>>, IEnumerator
+    {
+        private readonly BymlHash _hash;
+        private IntPtr _iterator;
+
+        object IEnumerator.Current => Current;
+        public KeyValuePair<string, Byml> Current {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+                BymlHashNative.BymlHashIteratorCurrent(_iterator, out byte* key, out Byml value);
+                return new(Utf8StringMarshaller.ConvertToManaged(key)!, value);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal Enumerator(BymlHash hash)
+        {
+            _hash = hash;
+            _iterator = IntPtr.Zero;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool MoveNext()
+        {
+            return BymlHashNative.BymlHashIteratorAdvance(_hash, _iterator, out _iterator);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Reset()
+        {
+            _iterator = IntPtr.Zero;
+        }
+
+        public void Dispose() { }
     }
 
     protected override bool ReleaseHandle()
