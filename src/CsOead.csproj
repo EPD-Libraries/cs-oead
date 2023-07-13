@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<NoWarn>CA1419</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

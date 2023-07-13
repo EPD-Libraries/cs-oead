@@ -20,10 +20,8 @@ public enum Mode
 /// </summary>
 public unsafe class Sarc : SafeHandleMinusOneIsInvalid, IEnumerable<KeyValuePair<string, DataMarshal>>, IEnumerable
 {
-    [Obsolete("Please use the Sarc(Endianness, Mode) constructor to create a new empty archive")]
-    public Sarc() : base(true) { }
-
-    public Sarc(Endianness endian, Mode mode = Mode.New) : base(true)
+    private Sarc() : base(true) { }
+    public Sarc(Endianness endian = Endianness.Little, Mode mode = Mode.New) : base(true)
     {
         _writer = SarcNative.SarcWriterNew(endian, mode);
     }
