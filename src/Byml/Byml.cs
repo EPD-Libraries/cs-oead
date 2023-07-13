@@ -4,7 +4,7 @@ public unsafe class Byml : SafeHandleZeroOrMinusOneIsInvalid
 {
     private bool _isChildNode = true;
 
-    public Byml() : base(true) { }
+    private Byml() : base(true) { }
     private Byml(Byml _ref) : this()
     {
         handle = _ref.handle;
