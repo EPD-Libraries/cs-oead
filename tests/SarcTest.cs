@@ -53,6 +53,34 @@ public class SarcTest
     }
 
     [TestMethod]
+    public Task General()
+    {
+        byte[] raw = Resource.Input("FromBinary");
+        Sarc sarc = Sarc.FromBinary(raw);
+
+        sarc["A/A1.res"] = "!A1"u8;
+        Assert.IsTrue(sarc["A/A1.res"].SequenceEqual("!A1"u8));
+
+        sarc.Add("D/D1.res", "D1"u8);
+        sarc["D/D2.res"] = "D2"u8;
+
+        Assert.IsTrue(sarc.Count == 17);
+        Assert.IsTrue(sarc.ContainsKey("D/D1.res"));
+        Assert.IsTrue(sarc.ContainsKey("D/D2.res"));
+
+        Assert.IsTrue(sarc.GetFile("D/D1.res").SequenceEqual("D1"u8));
+        Assert.IsTrue(sarc["D/D2.res"].SequenceEqual("D2"u8));
+
+        sarc.Remove("D/D2.res");
+        Assert.IsFalse(sarc.TryGetFile("D/D2.res", out _));
+
+        sarc.Clear();
+        Assert.IsFalse(sarc.Count > 0);
+
+        return Task.CompletedTask;
+    }
+
+    [TestMethod]
     [ExpectedException(typeof(InvalidSarcException))]
     public Task Invalid()
     {
