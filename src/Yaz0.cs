@@ -13,7 +13,6 @@ public unsafe class Yaz0
     /// </summary>
     /// <param name="alignment">The file alignment (Default: 0)</param>
     /// <param name="level">Compression level, 1-9 is valid (Default: 7)</param>
-    /// <returns></returns>
     public static DataMarshal Compress(string inputFile, uint alignment = 0, int level = 7) => Compress(File.ReadAllBytes(inputFile), alignment, level);
 
     /// <inheritdoc cref="Compress(string, uint, int)"/>
@@ -28,7 +27,6 @@ public unsafe class Yaz0
     /// Checks the input file or buffer for the Yaz0 header and returns the decompressed <paramref name="buffer"/> if the header was found (otherwise <see langword="null"/>)
     /// </summary>
     /// <param name="buffer">The decompressed buffer</param>
-    /// <returns></returns>
     public static bool TryDecompress(string inputFile, out byte[]? buffer) => TryDecompress(File.ReadAllBytes(inputFile), out buffer);
 
     /// <inheritdoc cref="TryDecompress(string, out byte[]?)"/>
@@ -42,8 +40,6 @@ public unsafe class Yaz0
     /// <summary>
     /// Decompresses the input file or buffer and returns the result as a managed <see langword="byte"/>[]
     /// </summary>
-    /// <param name="inputFile"></param>
-    /// <returns></returns>
     public static byte[] Decompress(string inputFile) => Decompress(File.ReadAllBytes(inputFile));
 
     /// <inheritdoc cref="Decompress(string)"/>
