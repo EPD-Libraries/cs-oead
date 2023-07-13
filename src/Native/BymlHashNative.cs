@@ -30,7 +30,7 @@ internal static unsafe partial class BymlHashNative
     internal static partial bool BymlHashIteratorAdvance(BymlHash hash, IntPtr iterator, out IntPtr next);
 
     [LibraryImport("cs_oead")]
-    internal static partial BymlHash BymlHashBuildEmpty();
+    internal static partial IntPtr BymlHashNew();
 
     [LibraryImport("cs_oead")]
     [return: MarshalAs(UnmanagedType.Bool)]
