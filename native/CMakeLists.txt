@@ -7,8 +7,14 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_SHARED_LIBRARY_PREFIX "")
 
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    add_compile_options(-fdiagnostics-color=always)
+
 if(WIN32)
     set(CMAKE_CXX_STANDARD_LIBRARIES "-static -static-libgcc -static-libstdc++")
+endif()
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    add_compile_options(-fcolor-diagnostics)
 endif()
 
 include(CTest)
@@ -33,6 +39,12 @@ add_library(cs_oead SHARED
     ./src/cs_yaz0.cpp
     ./src/include/export.h
 )
+
+if(MSVC)
+    target_compile_options(cs_oead PRIVATE /W4 /wd4244 /wd4127 /Zc:__cplusplus)
+else()
+    target_compile_options(cs_oead PRIVATE -Wall -Wextra -fno-plt)
+endif()
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/lib/oead)
 target_link_libraries(cs_oead PRIVATE oead)
