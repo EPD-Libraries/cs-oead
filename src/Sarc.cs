@@ -30,6 +30,11 @@ public unsafe class Sarc : SafeHandleMinusOneIsInvalid, IEnumerable<KeyValuePair
 
     private bool IsWriter => _writer > -1;
 
+    public ReadOnlySpan<byte> this[string key] {
+        get => GetFile(key);
+        set => Add(key, value);
+    }
+
     public static Sarc FromBinary(string inputFile) => FromBinary(File.ReadAllBytes(inputFile));
     public static Sarc FromBinary(ReadOnlySpan<byte> data)
     {
