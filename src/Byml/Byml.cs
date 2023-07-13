@@ -8,7 +8,7 @@ public unsafe class Byml : SafeHandleZeroOrMinusOneIsInvalid
     private Byml(Byml _ref) : this()
     {
         handle = _ref.handle;
-        _isChildNode = true;
+        _isChildNode = false;
     }
 
     public BymlType Type => BymlNative.BymlGetType(this);
