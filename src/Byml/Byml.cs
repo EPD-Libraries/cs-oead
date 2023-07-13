@@ -1,5 +1,8 @@
 ﻿namespace CsOead;
 
+/// <summary>
+/// Instance wrapper around the <a href="https://oead.readthedocs.io/en/stable/byml.html"><c>oead::Byml</c></a> class
+/// </summary>
 public unsafe class Byml : SafeHandleZeroOrMinusOneIsInvalid
 {
     private bool _isChildNode = true;
