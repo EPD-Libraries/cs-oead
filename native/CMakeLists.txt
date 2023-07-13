@@ -15,7 +15,12 @@ include(CTest)
 enable_testing()
 
 add_library(cs_oead SHARED
-    ./src/include/export.h
+    ./src/include/cs_byml_get.h
+    ./src/cs_byml_get.cpp
+    ./src/include/cs_byml_set.h
+    ./src/cs_byml_set.cpp
+    ./src/include/cs_byml.h
+    ./src/cs_byml.cpp
     ./src/include/cs_sarc_iterator.h
     ./src/include/cs_sarc_writer.h
     ./src/include/cs_sarc.h
@@ -24,6 +29,7 @@ add_library(cs_oead SHARED
     ./src/cs_sarc.cpp
     ./src/include/cs_yaz0.h
     ./src/cs_yaz0.cpp
+    ./src/include/export.h
 )
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/lib/oead)
