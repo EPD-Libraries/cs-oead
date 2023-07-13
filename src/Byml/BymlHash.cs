@@ -1,9 +1,28 @@
 ﻿using System.Collections;
-﻿namespace CsOead;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.Marshalling;
+
+namespace CsOead;
 
 public unsafe class BymlHash : SafeHandleZeroOrMinusOneIsInvalid, IEnumerable<KeyValuePair<string, Byml>>, IEnumerable
 {
-    public BymlHash() : base(true) { }
+    private readonly bool _isChildNode = true;
+    private BymlHash() : base(true) { }
+
+    public BymlHash(bool _ = true) : base(true)
+    {
+        handle = BymlHashNative.BymlHashNew();
+        _isChildNode = false;
+    }
+
+    public static implicit operator BymlHash(Dictionary<string, Byml> values) => new(values);
+    public static implicit operator BymlHash(SortedDictionary<string, Byml> values) => new(values);
+    public BymlHash(IEnumerable<KeyValuePair<string, Byml>> values) : this(true)
+    {
+        foreach ((var key, var value) in values) {
+            BymlHashNative.BymlHashAdd(this, key, value);
+        }
+    }
 
     public int Count => BymlHashNative.BymlHashCount(this);
 
@@ -93,6 +112,6 @@ public unsafe class BymlHash : SafeHandleZeroOrMinusOneIsInvalid, IEnumerable<Ke
 
     protected override bool ReleaseHandle()
     {
-        return BymlHashNative.BymlHashFree(this);
+        return _isChildNode || BymlHashNative.BymlHashFree(this);
     }
 }
