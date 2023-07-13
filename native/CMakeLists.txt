@@ -10,9 +10,9 @@ set(CMAKE_SHARED_LIBRARY_PREFIX "")
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     add_compile_options(-fdiagnostics-color=always)
 
-if(WIN32)
-    set(CMAKE_CXX_STANDARD_LIBRARIES "-static -static-libgcc -static-libstdc++")
-endif()
+    if(WIN32)
+        set(CMAKE_CXX_STANDARD_LIBRARIES "-static -static-libgcc -static-libstdc++")
+    endif()
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     add_compile_options(-fcolor-diagnostics)
 endif()
@@ -21,6 +21,8 @@ include(CTest)
 enable_testing()
 
 add_library(cs_oead SHARED
+    ./src/include/cs_byml_array.h
+    ./src/cs_byml_array.cpp
     ./src/include/cs_byml_get.h
     ./src/cs_byml_get.cpp
     ./src/include/cs_byml_hash.h
