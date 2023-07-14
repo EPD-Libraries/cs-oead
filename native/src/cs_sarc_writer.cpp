@@ -31,8 +31,8 @@ void SarcWriterSetMode(SarcWriter* writer, SarcWriter::Mode mode) {
   writer->SetMode(mode);
 }
 
-void SarcWriterContainsKey(SarcWriter* writer, const char* key) {
-  writer->m_files.contains(key);
+bool SarcWriterContainsKey(SarcWriter* writer, const char* key) {
+  return writer->m_files.contains(key);
 }
 
 void SarcWriterAddFile(SarcWriter* writer, const char* key, u8* src, u32 src_len) {

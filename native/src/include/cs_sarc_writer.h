@@ -14,7 +14,7 @@ EXP bool SarcWriterGetFile(SarcWriter* writer, const char* key, const u8** dst, 
 EXP void SarcWriterSetEndianness(SarcWriter* writer, util::Endianness endianness);
 EXP void SarcWriterSetMode(SarcWriter* writer, SarcWriter::Mode mode);
 
-EXP void SarcWriterContainsKey(SarcWriter* writer, const char* key);
+EXP bool SarcWriterContainsKey(SarcWriter* writer, const char* key);
 EXP void SarcWriterAddFile(SarcWriter* writer, const char* key, u8* src, u32 src_len);
 EXP void SarcWriterRemoveFile(SarcWriter* writer, const char* key);
 EXP void SarcWriterClearFiles(SarcWriter* writer);
