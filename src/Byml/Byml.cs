@@ -131,6 +131,6 @@ public unsafe class Byml : SafeHandleZeroOrMinusOneIsInvalid
 
     protected override bool ReleaseHandle()
     {
-        return _isChildNode || BymlNative.BymlFree(this);
+        return IsClosed || _isChildNode || BymlNative.BymlFree(this);
     }
 }

@@ -156,11 +156,6 @@ public unsafe class Sarc : SafeHandleMinusOneIsInvalid, IEnumerable<KeyValuePair
         SarcNative.SarcWriterClearFiles(Writer);
     }
 
-    protected override bool ReleaseHandle()
-    {
-        return SarcNative.SarcFree(this, _writer);
-    }
-
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     public IEnumerator<KeyValuePair<string, DataMarshal>> GetEnumerator()
     {
@@ -202,5 +197,10 @@ public unsafe class Sarc : SafeHandleMinusOneIsInvalid, IEnumerable<KeyValuePair
         }
 
         public void Dispose() { }
+    }
+
+    protected override bool ReleaseHandle()
+    {
+        return IsClosed || SarcNative.SarcFree(this, _writer);
     }
 }
