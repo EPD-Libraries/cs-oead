@@ -16,26 +16,26 @@ Byml* BymlSetBinary(u8* value, int value_len) {
   return new auto(Byml(std::vector<u8>(value_len, *value)));
 }
 
-Byml* BymlSetInt(S32 value) {
-  return new auto(Byml(value));
+Byml* BymlSetInt(s32 value) {
+  return new auto(Byml(Number{value}));
 }
 
-Byml* BymlSetUInt(U32 value) {
-  return new auto(Byml(value));
+Byml* BymlSetUInt(u32 value) {
+  return new auto(Byml(Number{value}));
 }
 
-Byml* BymlSetFloat(F32 value) {
-  return new auto(Byml(value));
+Byml* BymlSetFloat(f32 value) {
+  return new auto(Byml(Number{value}));
 }
 
-Byml* BymlSetInt64(S64 value) {
-  return new auto(Byml(value));
+Byml* BymlSetInt64(s64 value) {
+  return new auto(Byml(Number{value}));
 }
 
-Byml* BymlSetUInt64(U64 value) {
-  return new auto(Byml(value));
+Byml* BymlSetUInt64(u64 value) {
+  return new auto(Byml(Number{value}));
 }
 
-Byml* BymlSetDouble(F64 value) {
-  return new auto(Byml(value));
+Byml* BymlSetDouble(f64 value) {
+  return new auto(Byml(Number{value}));
 }
