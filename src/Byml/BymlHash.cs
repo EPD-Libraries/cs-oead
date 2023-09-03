@@ -112,6 +112,6 @@ public unsafe class BymlHash : SafeHandleZeroOrMinusOneIsInvalid, IEnumerable<Ke
 
     protected override bool ReleaseHandle()
     {
-        return _isChildNode || BymlHashNative.BymlHashFree(this);
+        return IsClosed || _isChildNode || BymlHashNative.BymlHashFree(this);
     }
 }

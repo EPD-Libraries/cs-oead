@@ -95,6 +95,6 @@ public unsafe class BymlArray : SafeHandleZeroOrMinusOneIsInvalid, IEnumerable<B
 
     protected override bool ReleaseHandle()
     {
-        return _isChildNode || BymlArrayNative.BymlArrayFree(this);
+        return IsClosed || _isChildNode || BymlArrayNative.BymlArrayFree(this);
     }
 }
